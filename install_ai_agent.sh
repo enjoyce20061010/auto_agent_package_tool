@@ -100,10 +100,8 @@ install_chatgpt_agent() {
         fail "OpenAI API Key cannot be empty. Installation cancelled."
     fi
 
-    # Replace placeholder in the script
-    # Note: Using a temporary file for sed to work on both macOS and Linux
-    sed -i.bak "s/YOUR_OPENAI_API_KEY/$OPENAI_API_KEY/g" "$AGENT_DIR/chatgpt_agent.py"
-    rm "$AGENT_DIR/chatgpt_agent.py.bak"
+    # Replace placeholder in the script using perl for cross-platform compatibility
+    perl -i -pe "s/YOUR_OPENAI_API_KEY/$OPENAI_API_KEY/g" "$AGENT_DIR/chatgpt_agent.py"
 
     success "ChatGPT Agent installed successfully!"
     info "To run the agent, use the following commands:"
